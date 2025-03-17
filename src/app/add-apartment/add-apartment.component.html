@@ -1,0 +1,72 @@
+<div>
+  <h2>Ajouter un Appartement</h2>
+  <form [formGroup]="apartForm" (ngSubmit)="onSubmit()">
+    
+    <!-- Apartment Number -->
+    <div>
+      <label>Numéro d'appartement</label>
+      <input type="text" formControlName="apartNum">
+      <div *ngIf="apartForm.get('apartNum')?.invalid && apartForm.get('apartNum')?.touched">
+        * Le numéro d'appartement est obligatoire et doit être un chiffre.
+      </div>
+    </div>
+
+    <!-- Floor Number -->
+    <div>
+      <label>Numéro d'étage</label>
+      <input type="text" formControlName="floorNum">
+      <div *ngIf="apartForm.get('floorNum')?.invalid && apartForm.get('floorNum')?.touched">
+        * Le numéro d'étage est obligatoire et doit être un chiffre.
+      </div>
+    </div>
+
+    <!-- Surface -->
+    <div>
+      <label>Surface (m²)</label>
+      <input type="text" formControlName="surface">
+      <div *ngIf="apartForm.get('surface')?.invalid && apartForm.get('surface')?.touched">
+        * La surface est obligatoire et doit être un chiffre.
+      </div>
+    </div>
+
+    <!-- Terrace -->
+    <div>
+      <label>Terrasse</label>
+      <input type="checkbox" formControlName="terrace">
+    </div>
+
+    <!-- Surface Terrace (Désactivé par défaut) -->
+    <div>
+      <label>Surface Terrasse (m²)</label>
+      <input type="text" formControlName="surfaceterrace" [disabled]="!apartForm.get('terrace')?.value">
+    </div>
+
+    <!-- Category -->
+    <div>
+      <label>Catégorie</label>
+      <input type="text" formControlName="category">
+      <div *ngIf="apartForm.get('category')?.invalid && apartForm.get('category')?.touched">
+        * La catégorie est obligatoire.
+      </div>
+    </div>
+
+    <!-- Submit Button -->
+    <button type="submit" [disabled]="apartForm.invalid">
+      Ajouter
+    </button>
+  </form>
+</div>
+
+<!-- Angular Tests -->
+<div *ngIf="apartForm.invalid">
+  <p *ngIf="apartForm.get('apartNum')?.hasError('required')">Le numéro d'appartement est requis.</p>
+  <p *ngIf="apartForm.get('apartNum')?.hasError('pattern')">Le numéro d'appartement doit être un chiffre.</p>
+  
+  <p *ngIf="apartForm.get('floorNum')?.hasError('required')">Le numéro d'étage est requis.</p>
+  <p *ngIf="apartForm.get('floorNum')?.hasError('pattern')">Le numéro d'étage doit être un chiffre.</p>
+  
+  <p *ngIf="apartForm.get('surface')?.hasError('required')">La surface est requise.</p>
+  <p *ngIf="apartForm.get('surface')?.hasError('pattern')">La surface doit être un chiffre.</p>
+  
+  <p *ngIf="apartForm.get('category')?.hasError('required')">La catégorie est requise.</p>
+</div>

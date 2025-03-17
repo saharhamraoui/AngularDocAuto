@@ -1,0 +1,9 @@
+<h2>Liste des Appartements</h2>
+<div *ngFor="let apartment of listAppar">
+  <p>Numéro d'Appartement: {{ apartment.apartNum }}</p>
+  <p>Étage: {{ apartment.floorNum }}</p>
+  <p>Surface: {{ apartment.surface }} m²</p>
+  <p>Terrasse: {{ apartment.terrace ? 'Oui' : 'Non' }}</p>
+</div>
+
+<a [routerLink]="['/addAppartment', residenceId]">add Appartment</a>
